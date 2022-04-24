@@ -1,29 +1,16 @@
 package com.example.england_incidents;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.AsyncTaskLoader;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.util.Xml;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,13 +39,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         handler = new Handler();
         setContentView(R.layout.incident_list);
+
         //recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        currentIncidentsArrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,new ArrayList<CurrentIncidents>());
         //adaptor = new RecyclerViewAdaptor(this);
-        getRSSAsyncTask = new GetRSSAsyncTask();
         //recyclerView.setAdapter(adaptor);
+
+
+        currentIncidentsArrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,new ArrayList<CurrentIncidents>());
+
+        getRSSAsyncTask = new GetRSSAsyncTask();
+
         listView = findViewById(R.id.incidentList);
-        listView.setAdapter(currentIncidentsArrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -68,8 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("incidents", currentIncidents);
                 System.out.println("Starting this activity");
                 startActivity(intent);
+
             }
         });
+
+        listView.setAdapter(currentIncidentsArrayAdapter);
 
         incidentarray = new ArrayList<>();
         //getRSSAsyncTask.doInBackground();
