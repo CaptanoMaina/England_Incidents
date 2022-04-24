@@ -6,11 +6,13 @@
         <entry key="..\:/Users/mmmai/Desktop/MPD/England_Incidents/app/src/main/res/layout/activity_incident_viewer.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/England_Incidents/app/src/main/res/layout/activity_main.xml" value="0.1984375" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/England_Incidents/app/src/main/res/layout/list_item.xml" value="0.1984375" />
+        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable-anydpi/ic_plus.xml" value="0.1015" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1645" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/ic_close.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/ic_date_range.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/ic_filter_list.xml" value="0.139" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
+        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1015" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.139" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/radio_flat_regular.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/drawable/radio_flat_selected.xml" value="0.1" />
@@ -19,11 +21,13 @@
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/details_view.xml" value="0.10969494358545759" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/dialog_filter.xml" value="0.2" />
-        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/incident_list.xml" value="0.264" />
+        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/incident_list.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/list_item.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/map_view.xml" value="0.1" />
         <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/planner_dialog.xml" value="0.1" />
-        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/menu/toolbar.xml" value="0.1" />
+        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/layout/planner_view.xml" value="0.2" />
+        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/menu/toolbar.xml" value="6.4" />
+        <entry key="..\:/Users/mmmai/Desktop/MPD/Maina_Margaret_s1906597/England_Incidents/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1015" />
       </map>
     </option>
   </component>

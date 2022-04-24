@@ -1,16 +1,21 @@
-package com.example.england_incidents;
+package com.example.england_incidents.Activities;
 
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.england_incidents.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+/**
+ * @author Margaret Maina s1906597
+ */
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -52,7 +57,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Add a marker and move the camera
         LatLng road_position = new LatLng(Double.parseDouble(roadlatitude), Double.parseDouble(roadlongitude));
-        mMap.addMarker(new MarkerOptions().position(road_position).title("Event Location: " +road).snippet("Event StartDate:" +startDate));
+        mMap.addMarker(new MarkerOptions().position(road_position).title("Event Location:  " +road).snippet("Event StartDate:  " +startDate));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(road_position));
     }
 }

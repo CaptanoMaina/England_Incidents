@@ -1,4 +1,4 @@
-package com.example.england_incidents;
+package com.example.england_incidents.Model;
 
 import java.io.Serializable;
 

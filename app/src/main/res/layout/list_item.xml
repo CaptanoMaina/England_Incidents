@@ -98,8 +98,9 @@
             android:layout_marginTop="15dp"
             android:text="View Road On Map" />
 
-
     </LinearLayout>
+
+
 
 
 </LinearLayout>

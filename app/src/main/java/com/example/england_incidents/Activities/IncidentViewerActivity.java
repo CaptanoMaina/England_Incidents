@@ -1,13 +1,13 @@
-package com.example.england_incidents;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.england_incidents.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import java.io.InputStream;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.england_incidents.R;
 
 /**
  * @author Margaret Maina s1906597

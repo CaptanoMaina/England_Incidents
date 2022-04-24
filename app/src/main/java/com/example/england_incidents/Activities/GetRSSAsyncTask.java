@@ -1,8 +1,9 @@
-package com.example.england_incidents;
+package com.example.england_incidents.Activities;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.util.Xml;
+
+import com.example.england_incidents.Model.CurrentIncidents;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -12,6 +13,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+/**
+ * @author Margaret Maina s1906597
+ */
 
 public class GetRSSAsyncTask extends AsyncTask<Void, Void, Void> {
 

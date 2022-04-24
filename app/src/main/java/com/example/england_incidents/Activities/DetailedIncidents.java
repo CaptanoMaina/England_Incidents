@@ -1,4 +1,4 @@
-package com.example.england_incidents;
+package com.example.england_incidents.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.england_incidents.Model.CurrentIncidents;
+import com.example.england_incidents.R;
+
+/**
+ * @author Margaret Maina s1906597
+ */
 
 public class DetailedIncidents extends AppCompatActivity implements View.OnClickListener {
 
@@ -83,7 +90,7 @@ Button mapButton;
 
         Intent intent;
         view.findViewById(R.id.mapButton);
-        intent = new Intent(getApplicationContext(),MapsActivity.class);
+        intent = new Intent(getApplicationContext(), MapsActivity.class);
         intent.putExtra("latitude", currentIncidents.getLatitude());
         intent.putExtra("longitude", currentIncidents.getLongitude());
         intent.putExtra("road", currentIncidents.getRoad());
