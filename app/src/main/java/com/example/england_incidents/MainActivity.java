@@ -4,10 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.util.Xml;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -18,181 +25,69 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author Margaret Maina s1906597
  */
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
 
-    private ArrayList <CurrentIncidents> incidentarray;
 
-    private RecyclerView recyclerView;
-    private RecyclerViewAdaptor adaptor;
+    private ListView listView;
+    //private RecyclerViewAdaptor adaptor;
+    private ArrayAdapter<CurrentIncidents> currentIncidentsArrayAdapter;
+    private GetRSSAsyncTask getRSSAsyncTask;
+    private ArrayList<CurrentIncidents> incidentarray;
 
+    private ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+    private Handler handler;
+
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        adaptor = new RecyclerViewAdaptor(this);
+        handler = new Handler();
+        setContentView(R.layout.incident_list);
+        //recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        currentIncidentsArrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,new ArrayList<CurrentIncidents>());
+        //adaptor = new RecyclerViewAdaptor(this);
+        getRSSAsyncTask = new GetRSSAsyncTask();
+        //recyclerView.setAdapter(adaptor);
+        listView = findViewById(R.id.incidentList);
+        listView.setAdapter(currentIncidentsArrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CurrentIncidents currentIncidents = currentIncidentsArrayAdapter.getItem(i);
+                Intent intent;
+                intent = new Intent(getApplicationContext(), DetailedIncidents.class);
+                intent.putExtra("incidents", currentIncidents);
+                System.out.println("Starting this activity");
+                startActivity(intent);
+            }
+        });
 
         incidentarray = new ArrayList<>();
-        GetRSSAsyncTask getRSSAsyncTask = new GetRSSAsyncTask();
-        getRSSAsyncTask.execute();
-    }
-    private class GetRSSAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-           InputStream inputStream = getInputStream();
-            try {
-                initXMLPullParser(inputStream);
-            } catch (XmlPullParserException | IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid){
-            adaptor.setIncidents(incidentarray);
-            super.onPostExecute(aVoid);
-        }
-    }
-
-    private void initXMLPullParser (InputStream inputStream) throws XmlPullParserException, IOException {
-        Log.d(TAG, "initXMLPullParser: called");
-        XmlPullParser parser = Xml.newPullParser();
-        parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-        parser.setInput(inputStream, null);
-        parser.nextTag();
-
-        parser.require(XmlPullParser.START_TAG, null, "rss");
-        while (parser.next() != XmlPullParser.END_TAG){
-            if (parser.getEventType() != XmlPullParser.START_TAG){
-                continue;
-            }
-             parser.require(XmlPullParser.START_TAG, null, "channel");
-            while (parser.next() != XmlPullParser.END_TAG){
-                if (parser.getEventType() != XmlPullParser.START_TAG){
-                    continue;
-                }
-                if (parser.getName().equals("item")) {
-                    parser.require(XmlPullParser.START_TAG, null, "item");
-
-                    String title = "";
-                    String description = "";
-                    String road = "";
-                    String latitude = "";
-                    String longitude = "";
-                    String eventStart = "";
-                    String eventEnd = "";
-
-                    while (parser.next() != XmlPullParser.END_TAG) {
-                        if (parser.getEventType() != XmlPullParser.START_TAG) {
-                            continue;
-                        }
-
-                        String tagName = parser.getName();
-                        if (tagName.equals("title")) {
-                            //get title content
-                            title = getContent(parser, "title");
-                        } else if (tagName.equals("description")) {
-                            //get description content
-                            description = getContent(parser, "description");
-                        } else if (tagName.equals("road")) {
-                            //get road content
-                            road = getContent(parser, "road");
-                        } else if (tagName.equals("latitude")) {
-                            //get latitude content
-                            latitude = getContent(parser, "latitude");
-                        } else if (tagName.equals("longitude")) {
-                            //get longitude content
-                            longitude = getContent(parser, "longitude");
-                        } else if (tagName.equals("eventStart")) {
-                            //get eventStart content
-                            eventStart = getContent(parser, "eventStart");
-                        } else if (tagName.equals("eventEnd")) {
-                            //get eventEnd content
-                            eventEnd = getContent(parser, "eventEnd");
-                        } else {
-                            //Skip the tag
-                            skipTag(parser);
-                        }
-                    }
-                    CurrentIncidents incidents = new CurrentIncidents(title, description, road, latitude, longitude, eventStart, eventEnd);
-                    incidentarray.add(incidents);
-
-                }else {
-                    //Skip the tag
-                    skipTag(parser);
-                }
-            }
-        }
-    }
+        //getRSSAsyncTask.doInBackground();
+        //getRSSAsyncTask.execute();
+        executorService.execute(()->{
+            getRSSAsyncTask.doInBackground();
+            handler.post(()->{
+                incidentarray = getRSSAsyncTask.getIncidentarray();
+                currentIncidentsArrayAdapter.addAll(getRSSAsyncTask.getIncidentarray());
+            });
+        });
 
 
-    private void skipTag (XmlPullParser parser) throws XmlPullParserException, IOException{
-        Log.d(TAG, "skipTag: skipping: " + parser.getName());
-        if (parser.getEventType() != XmlPullParser.START_TAG){
-            throw new IllegalStateException();
-        }
-
-        int num = 1;
-        while (num !=0){
-            switch (parser.next()){
-                case XmlPullParser.START_TAG:
-                    num ++;
-                    break;
-                case XmlPullParser.END_TAG:
-                    num--;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    private String getContent (XmlPullParser parser, String tagName){
-        try {
-            parser.require(XmlPullParser.START_TAG, null, tagName);
-
-            String content = "";
-
-            if (parser.next() == XmlPullParser.TEXT){
-                content = parser.getText();
-                parser.next();
-
-            }
-            return content;
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        }
-
-        return null;
 
     }
 
 
-    private InputStream getInputStream (){
-        Log.d(TAG, "getInputStream: started");
-        try {
-            URL url = new URL("http://m.highwaysengland.co.uk/feeds/rss/AllEvents.xml");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setDoInput(true);
-            connection.connect();
-            return connection.getInputStream();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return  null;
-    }
+
+
 }

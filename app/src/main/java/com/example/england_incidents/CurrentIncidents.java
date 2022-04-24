@@ -1,10 +1,12 @@
 package com.example.england_incidents;
 
+import java.io.Serializable;
+
 /**
  * @author Margaret Maina s1906597
  */
 
-public class CurrentIncidents {
+public class CurrentIncidents implements Serializable {
 
     private String title;
     private String description;
@@ -13,22 +15,20 @@ public class CurrentIncidents {
     private String longitude;
     private String eventStart;
     private String eventEnd;
-    private String link;
+
 
     public CurrentIncidents(String title, String description, String road, String latitude, String longitude, String eventStart, String eventEnd){
-        this.title = "";
-        this.description = "";
-        this.road = "";
-        this.latitude = "";
-        this.longitude = "";
-        this.eventStart = "";
-        this.eventEnd = "";
-        this.link="http://m.highwaysengland.co.uk/feeds/rss/AllEvents.xml";
+        this.title = title;
+        this.description = description;
+        this.road = road;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.eventStart = eventStart;
+        this.eventEnd = eventEnd;
+
     }
 
-    public String getLink() {
-        return link;
-    }
+
 
     public String getTitle() {
 
@@ -98,21 +98,14 @@ public class CurrentIncidents {
     public String toString()
     {
         String currentIncidents = "";
-        currentIncidents+= "==========================" + "\n"
-                +title + "\n"
-                +"==========================" + "\n"
+        currentIncidents+=
+                title + "\n"
                 +description     + "\n"
-                +"==========================" + "\n"
                 +road     + "\n"
-                +"==========================" + "\n"
                 +latitude     + "\n"
-                +"==========================" + "\n"
                 +longitude     + "\n"
-                +"==========================" + "\n"
                 +eventStart     + "\n"
-                +"==========================" + "\n"
-                +eventEnd + "\n"
-                +"==========================" + "\n";
+                +eventEnd + "\n";
 
         return currentIncidents;
     }

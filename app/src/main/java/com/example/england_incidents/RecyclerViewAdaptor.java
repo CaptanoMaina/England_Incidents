@@ -58,7 +58,7 @@ public class RecyclerViewAdaptor extends  RecyclerView.Adapter<RecyclerViewAdapt
             public void onClick(View view) {
                 //navigate to another view
                 Intent intent = new Intent (context, IncidentViewerActivity.class);
-               intent.putExtra("url", incidents.get(i).getLink());
+               //intent.putExtra("url", incidents.get(i).getLink());
                 context.startActivity(intent);
             }
 

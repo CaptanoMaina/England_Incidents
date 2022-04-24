@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    tools:context=".DetailedIncidents"
+    android:orientation="vertical" >
+
+
 
     <TextView
         android:id="@+id/salutation"
@@ -13,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:gravity="center"
-        android:text="Student ID: S1906597, Margaret Maina "
+        android:text="Student ID: S1906597, Margaret Maina"
         android:textSize="20sp"
         android:textStyle="bold" />
 
